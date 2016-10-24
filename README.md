@@ -15,7 +15,6 @@ window.addEventListener("message", function (event) {
         UserPresence.startTimer = function () { }
 
         var state = event.data.state.state;
-        console.log("Idle status received: " + state);
 
         if (state == "idle") {
             UserPresence.setAway();
