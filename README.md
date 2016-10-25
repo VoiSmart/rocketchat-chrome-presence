@@ -14,7 +14,7 @@ window.addEventListener("message", function (event) {
         UserPresence.stopTimer();
         UserPresence.startTimer = function () { }
 
-        var state = event.data.state.state;
+        var state = event.data.state;
 
         if (state == "idle") {
             UserPresence.setAway();

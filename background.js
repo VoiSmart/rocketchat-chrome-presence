@@ -23,10 +23,12 @@ chrome.idle.onStateChanged.addListener(function (state) {
         enableOnUrl: 'https://*/*'
     }, function (items) {
         var url = items.enableOnUrl;
+        var msg = "{type: \"idlestatus\", state: \"" + state + "\"}";
+        var code = "window.postMessage(" + msg + ", \"*\");";
 
         chrome.tabs.query({ url: url }, function (tabs) {
             tabs.forEach(function (tab) {
-                chrome.tabs.executeScript(tab.id, { file: "/idle.js" });
+                chrome.tabs.executeScript(tab.id, { code: code });
             });
         });
     });
@@ -34,15 +36,4 @@ chrome.idle.onStateChanged.addListener(function (state) {
 
 chrome.runtime.onInstalled.addListener(function () {
     chrome.idle.setDetectionInterval(idleTime);
-});
-
-chrome.runtime.onConnect.addListener(function (port) {
-    console.assert(port.name == "idlestatus");
-    port.onMessage.addListener(function (msg) {
-        if (msg.rq == "status") {
-            chrome.idle.queryState(idleTime, function (state) {
-                port.postMessage({ state: state });
-            });
-        }
-    });
 });
