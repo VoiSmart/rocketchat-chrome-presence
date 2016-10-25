@@ -1,19 +1,19 @@
 window.addEventListener("message", function (event) {
-    if (event.source != window) { return; }
+    if (event.source !== window) { return; }
 
     if (event.data.type && (event.data.type == "idlestatus")) {
         // disabling the built in timer, use me!
         UserPresence.stopTimer();
-        UserPresence.startTimer = function () { }
+        UserPresence.startTimer = function () { };
 
-        var state = event.data.state.state;
+        var state = event.data.state;
         console.log("Idle status received: " + state);
 
-        if (state == "idle") {
+        if (state === "idle") {
             UserPresence.setAway();
-        } else if (state == "active") {
+        } else if (state === "active") {
             UserPresence.setOnline();
-        } else if (state == "locked") {
+        } else if (state === "locked") {
             UserPresence.setAway();
         }
 
