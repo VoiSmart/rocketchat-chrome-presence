@@ -1,14 +1,10 @@
 window.addEventListener("message", function (event) {
-    if (event.source !== window) { return; }
+    if ((event.source != window) || (event.data.name != 'rocketchat_presence')) {
+        return;
+    }
 
-    if (event.data.type && (event.data.type == "idlestatus")) {
-        // disabling the built in timer, use me!
-        UserPresence.stopTimer();
-        UserPresence.startTimer = function () { };
-
+    if (event.data.type === "idlestatus")) {
         var state = event.data.state;
-        console.log("Idle status received: " + state);
-
         if (state === "idle") {
             UserPresence.setAway();
         } else if (state === "active") {
@@ -17,5 +13,10 @@ window.addEventListener("message", function (event) {
             UserPresence.setAway();
         }
 
+    }
+    else if (event.data.rocketchat_presence_extension) {
+        // disabling the built in timer, use me!
+        UserPresence.stopTimer();
+        UserPresence.startTimer = function () { }
     }
 });

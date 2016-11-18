@@ -20,6 +20,7 @@
     "idle",
     "tabs",
     "storage",
+    "alarms",
     "*://*/*"
   ]
 }
