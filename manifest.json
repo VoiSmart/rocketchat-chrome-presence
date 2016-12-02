@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "Chat Presence",
+  "name": "VoiSmart Social Chat",
   "version": "1.0",
   "minimum_chrome_version": "50",
   "icons": {
