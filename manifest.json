@@ -1,6 +1,7 @@
 {
   "manifest_version": 2,
   "name": "VoiSmart Social Chat",
+  "short_name": "VoiSmartChat",
   "version": "1.0",
   "minimum_chrome_version": "50",
   "icons": {
